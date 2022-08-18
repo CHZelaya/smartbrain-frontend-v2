@@ -1,12 +1,21 @@
 import React from 'react'
-import { ImageLinkFormContainer, ImageLinkItem } from './ImageLinkFormElements';
+import { ImageLinkFormContainer, Paragraph, FormContainer, FormItem, Input, Button } from './ImageLinkFormElements';
 
 const ImageLinkForm = () => {
     return (
         <ImageLinkFormContainer>
-            <ImageLinkItem>
-                <h2>Image Link Form</h2>
-            </ImageLinkItem>
+            <Paragraph>
+                {`This Magic Brain will detect faces in your pictures, try it out!`}
+            </Paragraph>
+            <FormContainer>
+                <FormItem>
+                    <Input>
+                    </Input>
+                    <Button>
+                        Detect Face
+                    </Button>
+                </FormItem>
+            </FormContainer>
         </ImageLinkFormContainer>
     )
 }
