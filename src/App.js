@@ -15,12 +15,19 @@ class App extends Component {
     super(props);
     this.state = {
       input: '',
+      image: '',
     };
   }
 
   onInputChange = (event) => {
-    console.log(event)
+    this.setState({ input: event.target.value });
+    console.log(this.state.input)
+  };
 
+  onButtonSubmit = (event) => {
+    event.preventDefault();
+    this.setState({ image: this.state.input });
+    console.log("state of image:", this.state.image)
   };
 
   render() {
@@ -30,7 +37,7 @@ class App extends Component {
         <Navigation />
         <Logo />
         <Rank />
-        <ImageLinkForm onInputChange={this.onInputChange} />
+        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
         <FaceRecogntion />
       </div>
     );

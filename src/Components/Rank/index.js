@@ -1,8 +1,6 @@
 import React from 'react';
 import {
-    RankContainer
-    , RankItem
-    , Paragraph
+    Paragraph
     , Paragraph2
 } from './RankElements';
 

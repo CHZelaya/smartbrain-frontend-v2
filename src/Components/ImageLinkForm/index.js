@@ -1,7 +1,7 @@
 import React from 'react'
 import { Paragraph, FormContainer, FormItem, Input, Button } from './ImageLinkFormElements';
 
-const ImageLinkForm = () => {
+const ImageLinkForm = ({ onInputChange, onButtonSubmit }) => {
     return (
         <>
             <Paragraph>
@@ -9,9 +9,9 @@ const ImageLinkForm = () => {
             </Paragraph>
             <FormContainer>
                 <FormItem>
-                    <Input>
+                    <Input onChange={onInputChange}>
                     </Input>
-                    <Button>
+                    <Button onClick={onButtonSubmit}>
                         Detect Face
                     </Button>
                 </FormItem>
