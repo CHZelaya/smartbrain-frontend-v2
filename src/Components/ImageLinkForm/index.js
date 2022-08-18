@@ -1,9 +1,9 @@
 import React from 'react'
-import { ImageLinkFormContainer, Paragraph, FormContainer, FormItem, Input, Button } from './ImageLinkFormElements';
+import { Paragraph, FormContainer, FormItem, Input, Button } from './ImageLinkFormElements';
 
 const ImageLinkForm = () => {
     return (
-        <ImageLinkFormContainer>
+        <>
             <Paragraph>
                 {`This Magic Brain will detect faces in your pictures, try it out!`}
             </Paragraph>
@@ -16,7 +16,7 @@ const ImageLinkForm = () => {
                     </Button>
                 </FormItem>
             </FormContainer>
-        </ImageLinkFormContainer>
+        </>
     )
 }
 

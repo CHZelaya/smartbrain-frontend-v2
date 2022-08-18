@@ -11,7 +11,17 @@ import Rank from './Components/Rank';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+    };
+  }
 
+  onInputChange = (event) => {
+    console.log(event)
+
+  };
 
   render() {
     return (
@@ -20,7 +30,7 @@ class App extends Component {
         <Navigation />
         <Logo />
         <Rank />
-        <ImageLinkForm />
+        <ImageLinkForm onInputChange={this.onInputChange} />
         <FaceRecogntion />
       </div>
     );
@@ -29,4 +39,3 @@ class App extends Component {
 
 export default App;
 
-// import { Navigation } from './NavigationElements';

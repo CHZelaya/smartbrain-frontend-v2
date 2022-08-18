@@ -8,16 +8,14 @@ import {
 
 const Rank = () => {
     return (
-        <RankContainer>
-            <RankItem>
-                <Paragraph>
-                    {`User, your current rank is...`}
-                </Paragraph>
-                <Paragraph2>
-                    {`#5`}
-                </Paragraph2>
-            </RankItem>
-        </RankContainer>
+        <>
+            <Paragraph>
+                {`User, your current rank is...`}
+            </Paragraph>
+            <Paragraph2>
+                {`#5`}
+            </Paragraph2>
+        </>
     )
 }
 

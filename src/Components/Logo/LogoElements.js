@@ -2,15 +2,13 @@ import styled from 'styled-components'
 
 export const LogoContainer = styled.div.attrs({
     className: 'container ma4 mt0',
-})`
-`
+})``
 
 export const Card = styled.div.attrs({
     className: 'card',
     tiltReverse: true,
 })`
     display: flex;
-    
     `
 
 export const Tilt = styled.div.attrs({
