@@ -25,7 +25,6 @@ export const Input = styled.input.attrs({
     className: "input f4 pa2 w-70 center"
     , type: "text"
     , placeholder: "Enter URL here"
-    , required: true
 })``
 
 export const Button = styled.button.attrs({

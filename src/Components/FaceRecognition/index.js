@@ -1,13 +1,22 @@
-import React from 'react'
+import React from 'react';
+import { FaceRecognitionContainer, ImageContainer, Image } from './FaceRecognitionElements';
 
-const FaceRecogntion = () => {
+const FaceRecogntion = ({ IMAGE_URL }) => {
     return (
-        <>
-            <div>
-                <h3>Face Recognition</h3>
-            </div>
-
-        </>
+        <FaceRecognitionContainer>
+            <ImageContainer>
+                <Image src={IMAGE_URL} ></Image>
+                {/* <div className="Bounding-box"
+                // style={{
+                //     left: box.leftCol,
+                //     top: box.topRow,
+                //     right: box.rightCol,
+                //     bottom: box.bottomRow
+                // }}
+                >
+                </div> */}
+            </ImageContainer>
+        </FaceRecognitionContainer>
     )
 }
 

@@ -6,3 +6,8 @@
   position: fixed;
   z-index: -1;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+}

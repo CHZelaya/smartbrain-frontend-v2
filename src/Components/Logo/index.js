@@ -18,7 +18,7 @@ const Logo = () => {
                     gyroscope={true}
                 >
                     <InnerTilt>
-                        <img src={brain} style={{ paddingtop: "5px", width: "auto", height: "auto" }} className="pa3" alt="pic" />
+                        <img src={brain} style={{ paddingtop: "5px", width: "auto", height: "auto", zIndex: "1" }} className="pa3" alt="pic" />
                     </InnerTilt>
                 </Tilt>
             </Card>
