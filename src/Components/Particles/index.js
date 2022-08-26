@@ -22,7 +22,7 @@ const ParticlesComponent = () => {
                     value: { min: 0.1, max: 0.8 },
                 },
                 number: {
-                    value: 100,
+                    value: 150,
                 },
                 fullscreen: {
                     enable: true,
