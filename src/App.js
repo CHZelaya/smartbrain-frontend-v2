@@ -6,8 +6,8 @@ import ImageLinkForm from './Components/ImageLinkForm';
 import Logo from './Components/Logo';
 import Navigation from './Components/Navigation';
 import Rank from './Components/Rank';
+import SignIn from './Components/SignIn';
 
-console.log("Thats good! Are you excited for school?~!")
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class App extends Component {
       MODEL_VERSION_ID: "6dc7e46bc9124c5c8824be4822abe105",
       IMAGE_URL: '',
       box: {},
+      route: 'signin',
     };
   }
 
@@ -106,13 +107,21 @@ class App extends Component {
       <div className="App">
         <ParticlesComponent className='particles' />
         <Navigation />
-        <Logo />
-        <Rank />
-        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-        <FaceRecogntion
-          IMAGE_URL={this.state.IMAGE_URL}
-          box={this.state.box}
-        />
+        {
+          this.state.route === 'signin'
+            ?
+            <SignIn />
+            :
+            <>
+              <Logo />
+              <Rank />
+              <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
+              <FaceRecogntion
+                IMAGE_URL={this.state.IMAGE_URL}
+                box={this.state.box}
+              />
+            </>
+        }
       </div>
     );
   }
