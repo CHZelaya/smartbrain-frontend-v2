@@ -7,6 +7,7 @@ import Logo from './Components/Logo';
 import Navigation from './Components/Navigation';
 import Rank from './Components/Rank';
 import SignIn from './Components/SignIn';
+import Register from './Components/Register';
 
 
 class App extends Component {
@@ -24,7 +25,17 @@ class App extends Component {
       IMAGE_URL: '',
       box: {},
       route: 'signin',
+      isSignedIn: false,
     };
+  }
+
+  onRouteChange = (route) => {
+    if (route === 'signout') {
+      this.setState({ isSignedIn: false });
+    } else if (route === 'home') {
+      this.setState({ isSignedIn: true });
+    };
+    this.setState({ route: route });
   }
 
   calculateFaceLocation = (data) => {
@@ -106,12 +117,10 @@ class App extends Component {
     return (
       <div className="App">
         <ParticlesComponent className='particles' />
-        <Navigation />
+        <Navigation onRouteChange={this.onRouteChange} isSignedIn={this.state.isSignedIn} />
         {
-          this.state.route === 'signin'
+          this.state.route === 'home'
             ?
-            <SignIn />
-            :
             <>
               <Logo />
               <Rank />
@@ -121,10 +130,19 @@ class App extends Component {
                 box={this.state.box}
               />
             </>
+            :
+            (
+              this.state.route === 'signin'
+                ?
+                <SignIn onRouteChange={this.onRouteChange} />
+                :
+                <Register onRouteChange={this.onRouteChange} />
+            )
+
         }
       </div>
     );
-  }
+  };
 }
 
 

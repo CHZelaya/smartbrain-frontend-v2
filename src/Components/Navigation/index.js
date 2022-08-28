@@ -1,15 +1,24 @@
 import React from 'react'
-import { NavigationContainer, NavigationItem } from './NavigationElements';
+import { NavigationContainer, MenuItem } from './NavigationElements';
 
 
-const Navigation = () => {
-    return (
-        <NavigationContainer>
-            <NavigationItem>
-                Signout
-            </NavigationItem>
-        </NavigationContainer>
-    )
+const Navigation = ({ onRouteChange, isSignedIn }) => {
+    if (isSignedIn) {
+        return (
+            <NavigationContainer>
+                <MenuItem onClick={() => onRouteChange('signout')}>
+                    Sign out
+                </MenuItem>
+            </NavigationContainer>
+        )
+    } else {
+        return (
+
+            <div>
+                <br></br><br></br>
+            </div>
+        )
+    }
 }
 
 export default Navigation

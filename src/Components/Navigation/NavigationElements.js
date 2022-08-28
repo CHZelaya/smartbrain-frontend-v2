@@ -6,6 +6,7 @@ export const NavigationContainer = styled.div.attrs({
 justify-content: flex-end;
 `
 
-export const NavigationItem = styled.div.attrs({
-    className: 'item f3 link dim black underline pa3 pointer '
+export const MenuItem = styled.p.attrs({
+    className: 'item f3 link dim black underline pa3 pointer ',
+
 })``

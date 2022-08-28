@@ -28,9 +28,11 @@ export const Input = styled.input.attrs({
 })``
 
 export const Button = styled.button.attrs({
-    className: "button w-30 grow f4 link ph3 pv2 dib white bg-light-purple"
+    className: "button w-30 grow f4 link ph3 pv2 dib white"
     , type: "button"
     ,
 })`
 cursor: pointer;
+background-color: #FF0000;
+
 `
