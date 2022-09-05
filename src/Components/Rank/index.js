@@ -1,17 +1,17 @@
 import React from 'react';
 import {
-    Paragraph
-    , Paragraph2
+    Paragraph,
+    Paragraph2
 } from './RankElements';
 
-const Rank = () => {
+const Rank = ({ name, entries }) => {
     return (
         <>
             <Paragraph>
-                {`User, your current rank is...`}
+                {`${name}, your current rank is...`}
             </Paragraph>
             <Paragraph2>
-                {`#5`}
+                {`${entries}`}
             </Paragraph2>
         </>
     )

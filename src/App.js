@@ -9,29 +9,45 @@ import Rank from './Components/Rank';
 import SignIn from './Components/SignIn';
 import Register from './Components/Register';
 
+const initialState = {  // Your PAT (Personal Access Token) can be found in the portal under Authentification
+  IMAGE_URL: '',
+  input: '',
+  box: {},
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    email: '',
+    name: '',
+    entries: 0,
+    joined: '',
+
+  }
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      input: '',
-      USER_ID: 'bzb0xw4yumac',
-      // Your PAT (Personal Access Token) can be found in the portal under Authentification
-      PAT: '01ba72f5e58f4a4b8afa0f86439cf98f',
-      APP_ID: 'ZTM-Face-Recognition',
-      // Change these to whatever model and image URL you want to use
-      MODEL_ID: 'face-detection',
-      MODEL_VERSION_ID: "6dc7e46bc9124c5c8824be4822abe105",
-      IMAGE_URL: '',
-      box: {},
-      route: 'signin',
-      isSignedIn: false,
-    };
+    this.state = initialState;
   }
+
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        email: data.email,
+        name: data.name,
+        entries: data.entries,
+        joined: data.joined
+      }
+    }, () => {
+      return this.state.user;
+    });
+  };
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState({ isSignedIn: false });
+      this.setState(initialState);
     } else if (route === 'home') {
       this.setState({ isSignedIn: true });
     };
@@ -54,7 +70,7 @@ class App extends Component {
   displayBoundingBox = (box) => {
     this.setState({ box: box },
       () => {
-        console.log('Display Bounding Box', this.state.box);
+        return this.state.box;
       });
   };
 
@@ -62,55 +78,40 @@ class App extends Component {
   onInputChange = (event) => {
     this.setState({ input: event.target.value },
       () => {
-        console.log("onInputChange CL:", this.state.input)
+        return this.state.input
       });
   };
 
-  onButtonSubmit = (event) => {
-    event.preventDefault();
-    this.setState({ IMAGE_URL: this.state.input },
-      () => {
-        console.log("onButtonSubmit CL:", this.state.input)
-        return this.onApiCall()
-      });
-  }
-
-  onApiCall = () => {
-    console.log("Api initialization successful")
-    const raw = JSON.stringify({
-      "user_app_id": {
-        "user_id": this.state.USER_ID,
-        "app_id": this.state.APP_ID
-      },
-      "inputs": [
-        {
-          "data": {
-            "image": {
-              "url": this.state.IMAGE_URL
-            }
-          }
-        }
-      ]
-    });
-
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Key ' + this.state.PAT
-      },
-      body: raw
-    };
-
-    fetch("https://api.clarifai.com/v2/models/" + this.state.MODEL_ID + "/versions/" + this.state.MODEL_VERSION_ID + "/outputs", requestOptions)
+  onButtonSubmit = () => {
+    this.setState({ IMAGE_URL: this.state.input });
+    fetch('http://localhost:3000/imageurl', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
       .then(response => response.json())
-      .then(result => this.displayBoundingBox(this.calculateFaceLocation(result)))
-      .catch(error => console.log('Critical Error, exiting: ', error));
+      .then(response => {
+        if (response) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: this.state.user.id
+            })
+          })
+            .then(response => response.json())
+            .then(count => {
+              this.setState(Object.assign(this.state.user, { entries: count }))
+            })
+            .catch(console.log)
 
-
-
-  };
-
+        }
+        this.displayBoundingBox(this.calculateFaceLocation(response))
+      })
+      .catch(err => console.log(err));
+  }
 
   // ! RENDER METHOD BELOW THIS LINE
   render() {
@@ -123,7 +124,7 @@ class App extends Component {
             ?
             <>
               <Logo />
-              <Rank />
+              <Rank name={this.state.user.name} entries={this.state.user.entries} />
               <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
               <FaceRecogntion
                 IMAGE_URL={this.state.IMAGE_URL}
@@ -134,9 +135,9 @@ class App extends Component {
             (
               this.state.route === 'signin'
                 ?
-                <SignIn onRouteChange={this.onRouteChange} />
+                <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
                 :
-                <Register onRouteChange={this.onRouteChange} />
+                <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
             )
 
         }
