@@ -37,8 +37,12 @@ class Register extends React.Component {
     onSubmitSignIn = (event) => {
         event.preventDefault();
         fetch('https://afternoon-temple-58818.herokuapp.com/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json; charset=utf-8',
+                'Host': 'https://afternoon-temple-58818.herokuapp.com',
+            },
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,
@@ -53,6 +57,26 @@ class Register extends React.Component {
                 }
             })
     }
+
+    // onSubmitSignIn = (event) => {
+    //     event.preventDefault();
+    //     fetch('localhost:/register', {
+    //         method: 'post',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({
+    //             email: this.state.email,
+    //             password: this.state.password,
+    //             name: this.state.name,
+    //         })
+    //     })
+    //         .then(response => response.json())
+    //         .then(user => {
+    //             if (user.id) {
+    //                 this.props.loadUser(user);
+    //                 this.props.onRouteChange('home');
+    //             }
+    //         })
+    // }
 
     //!Render Method past this line.
     render() {
