@@ -26,5 +26,4 @@ export const InnerTilt = styled.div.attrs({
 })`
 height: 150px;
 width: 150px;
-backgroundColor: 'green'; 
 `

@@ -36,12 +36,12 @@ class Register extends React.Component {
 
     onSubmitSignIn = (event) => {
         event.preventDefault();
-        fetch('https://afternoon-temple-58818.herokuapp.com/register', {
+        fetch('https://smart-brain-api-production.up.railway.app/register', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json; charset=utf-8',
-                'Host': 'https://afternoon-temple-58818.herokuapp.com',
+                'Host': 'https://smart-brain-api-production.up.railway.app',
             },
             body: JSON.stringify({
                 email: this.state.email,

@@ -84,7 +84,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ IMAGE_URL: this.state.input });
-    fetch('https://afternoon-temple-58818.herokuapp.com/imageurl', {
+    fetch('https://smart-brain-api-production.up.railway.app/imageurl', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -94,7 +94,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if (response) {
-          fetch('https://afternoon-temple-58818.herokuapp.com/image', {
+          fetch('https://smart-brain-api-production.up.railway.app/image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -115,20 +115,22 @@ class App extends Component {
 
   // ! RENDER METHOD BELOW THIS LINE
   render() {
+    const { IMAGE_URL, box, isSignedIn } = this.state;
+    const { name, entries } = this.state.user;
     return (
       <div className="App">
         <ParticlesComponent className='particles' />
-        <Navigation onRouteChange={this.onRouteChange} isSignedIn={this.state.isSignedIn} />
+        <Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn} />
         {
           this.state.route === 'home'
             ?
             <>
               <Logo />
-              <Rank name={this.state.user.name} entries={this.state.user.entries} />
+              <Rank name={name} entries={entries} />
               <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
               <FaceRecogntion
-                IMAGE_URL={this.state.IMAGE_URL}
-                box={this.state.box}
+                IMAGE_URL={IMAGE_URL}
+                box={box}
               />
             </>
             :

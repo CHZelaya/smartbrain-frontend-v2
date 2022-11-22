@@ -29,9 +29,13 @@ class SignIn extends React.Component {
 
     onSubmitSignIn = (event) => {
         event.preventDefault();
-        fetch('https://afternoon-temple-58818.herokuapp.com/signin', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+        fetch('https://smart-brain-api-production.up.railway.app/signin', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json; charset=utf-8',
+                'Host': 'https://smart-brain-api-production.up.railway.app',
+            },
             body: JSON.stringify({
                 email: this.state.signInEmail,
                 password: this.state.signInPassword,
